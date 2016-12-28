@@ -1,0 +1,25 @@
+{% load wagtailcore_tags %}
+
+{% for post in posts %}
+  <section class="section content">
+    <div class="container">
+      <div class="heading">
+        <h1 class="title">
+          <a href="{% pageurl post %}">{{ post.title }}</a>
+        </h1>
+        <div class="tag-container">
+          {% for name in post.tag_names %}
+          <span class="tag is-primary">
+            <a href="">{{ name }}</a>
+          </span>
+          {% endfor %}
+        </div>
+        <h2 class="subtitle">
+          {{ post.intro }}
+        </h2>
+
+        {{ post.body | richtext }}
+      </div>
+    </div>
+  </section>
+{% endfor %}

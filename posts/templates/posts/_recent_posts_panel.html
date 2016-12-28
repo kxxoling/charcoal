@@ -1,0 +1,23 @@
+{% load wagtailcore_tags %}
+
+<nav class="panel">
+  {{ name }}
+  <p class="panel-heading">
+    Recent posts
+  </p>
+
+  {% for post in posts %}
+    <a class="panel-block is-active" href="{% pageurl post %}">
+    <span class="panel-icon">
+      <i class="fa fa-book"></i>
+    </span>
+    {{ post.title }}
+  </a>
+  {% endfor %}
+
+  <div class="panel-block">
+    <a class="button is-primary is-outlined is-fullwidth" href="/">
+      Random!
+    </a>
+  </div>
+</nav>

@@ -1,0 +1,15 @@
+Django
+wagtail
+
+psycopg2
+django-compressor
+django-modelcluster
+django-taggit
+
+libsass
+django-libsass
+Pillow
+html5lib
+
+django-redis
+elasticsearch
