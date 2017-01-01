@@ -1,7 +1,14 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags compress static %}
 
 {% block body_class %}template-homepage{% endblock %}
+
+
+{% block extra_css %}
+  {% compress css inline %}
+    <link rel="stylesheet" type="text/stylus" href="{% static 'styles/post.styl' %}"/>
+  {% endcompress %}
+{% endblock %}
 
 {% block content %}
 <div class="content is-medium">
@@ -15,11 +22,26 @@
     {% endfor %}
   </div>
 
-  <div class="post-body">{{ page.body | richtext }}</div>
+  {% if page.body %}
+    <div class="post-body">{{ page.body | richtext }}</div>
+  {% endif %}
+
+  <div class="gallery">
+    {% for img in page.gallery_images.all %}
+      <figure class="gallery-image">
+        {% image img.image original as orig_img %}
+        {% image img.image height-250 as thumb %}
+        <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
+        {% if img.caption %}
+          <figcaption>{{ img.caption }}</figcaption>
+        {% endif %}
+      </figure>
+    {% endfor %}
+  </div>
 
   <div class="time-container">
-    <span class="posted-at">{{ page.datetime_posted }}</span>
-    <span class="edited-at">{{ page.datetime_edited }}</span>
+    <label>Posted at: </label><span class="posted-at">{{ page.datetime_posted | date:'Y-m-d H:i' }}</span>
+    <label>Edited at: </label><span class="edited-at">{{ page.datetime_edited | date:'Y-m-d H:i' }}</span>
   </div>
 
 </div>

@@ -9,6 +9,7 @@ django-taggit
 libsass
 django-libsass
 Pillow
+wand
 html5lib
 
 django-redis

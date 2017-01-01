@@ -55,7 +55,7 @@ class Post(Page):
 
 
 class GalleryImage(Orderable):
-    page = ParentalKey(Page, related_name='gallery_images')
+    page = ParentalKey(Post, related_name='gallery_images')
     image = ForeignKey(
         'wagtailimages.Image', on_delete=CASCADE, related_name='+'
     )
