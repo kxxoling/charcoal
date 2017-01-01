@@ -22,7 +22,7 @@ class PostTag(TaggedItemBase):
 class Post(Page):
     datetime_posted = DateTimeField('Post time', auto_now_add=True)
     datetime_edited = DateTimeField('Edit time', auto_now=True)
-    intro = CharField(max_length=300)
+    intro = CharField(max_length=300, null=True, blank=True)
     body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=PostTag, blank=True)
 
@@ -60,8 +60,10 @@ class GalleryImage(Orderable):
         'wagtailimages.Image', on_delete=CASCADE, related_name='+'
     )
     caption = CharField(blank=True, max_length=250)
+    source = CharField(blank=True, null=True, max_length=300)
 
     panels = [
         ImageChooserPanel('image'),
         FieldPanel('caption'),
+        FieldPanel('source'),
     ]
