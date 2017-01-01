@@ -1,4 +1,8 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags compress static %}
+
+{% compress css inline %}
+  <link rel="stylesheet" type="text/stylus" href="{% static 'styles/post.styl' %}"/>
+{% endcompress %}
 
 {% for post in posts %}
   <section class="section content">
@@ -17,6 +21,17 @@
         <h2 class="subtitle">
           {{ post.intro }}
         </h2>
+
+        {% with post.gallery_images.first as img %}
+          <figure class="gallery-image">
+            {% image img.image original as orig_img %}
+            {% image img.image height-250 as thumb %}
+            <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
+            {% if img.caption %}
+              <figcaption>{{ img.caption }}</figcaption>
+            {% endif %}
+          </figure>
+        {% endwith %}
 
         {{ post.body | richtext }}
       </div>
