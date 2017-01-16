@@ -1,10 +1,11 @@
 from __future__ import absolute_import, unicode_literals
 
+from django.db.models import Model
 from django.db.models import DateTimeField, CharField
-from django.db.models import CASCADE, ForeignKey
+from django.db.models import CASCADE, SET_NULL, ForeignKey, OneToOneField
 
 from modelcluster.fields import ParentalKey
-from modelcluster.tags import ClusterTaggableManager
+from modelcluster.contrib.taggit import ClusterTaggableManager
 
 from taggit.models import TaggedItemBase
 
@@ -12,36 +13,40 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailimages.models import Image
 from wagtail.wagtailsearch import index
 
 
-class PostTag(TaggedItemBase):
-    content_object = ParentalKey('Post', related_name='tagged_posts')
+class Tag(TaggedItemBase):
+    content_object = ParentalKey('ArticlePage', related_name='articles')
 
 
-class Post(Page):
+class BasePageModel(Page):
+    class Meta:
+        abstract = True
+
     datetime_posted = DateTimeField('Post time', auto_now_add=True)
     datetime_edited = DateTimeField('Edit time', auto_now=True)
-    intro = CharField(max_length=300, null=True, blank=True)
-    body = RichTextField(blank=True)
-    tags = ClusterTaggableManager(through=PostTag, blank=True)
+    tags = ClusterTaggableManager(through=Tag, blank=True, related_name='pages')
 
-    content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full"),
+    panels = Page.content_panels +[
+         MultiFieldPanel([
+             FieldPanel('tags'),
+         ]),
     ]
 
+
+class ArticlePage(BasePageModel):
+    body = RichTextField(null=False)
+    cover_image = ForeignKey(Image, related_name='articles', on_delete=SET_NULL, null=True, blank=True)
+
     search_fields = Page.search_fields + [
-        index.SearchField('intro'),
         index.SearchField('body'),
     ]
 
-    content_panels = Page.content_panels + [
-        MultiFieldPanel([
-            FieldPanel('tags'),
-        ]),
-        FieldPanel('intro'),
+    content_panels = BasePageModel.content_panels + [
         FieldPanel('body', classname="full"),
-        InlinePanel('gallery_images', label="Gallery images"),
+        ImageChooserPanel('cover_image'),
     ]
 
     @property
@@ -49,13 +54,13 @@ class Post(Page):
         return self.tags.names()
 
     def get_context(self, request):
-        context = super(Post, self).get_context(request)
-        context['recent_posts'] = Post.objects.live()[:5]
+        context = super(ArticlePage, self).get_context(request)
+        context['recent_posts'] = ArticlePage.objects.live()[:5]
         return context
 
 
 class GalleryImage(Orderable):
-    page = ParentalKey(Post, related_name='gallery_images')
+    page = ParentalKey(ArticlePage, related_name='gallery_images')
     image = ForeignKey(
         'wagtailimages.Image', on_delete=CASCADE, related_name='+'
     )

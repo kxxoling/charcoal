@@ -1,11 +1,11 @@
 from wagtail.wagtailcore.models import Page
-from posts.models import Post
+from posts.models import ArticlePage
 
 
 class HomePage(Page):
 
     def get_context(self, request):
         context = super(HomePage, self).get_context(request)
-        context['posts'] = Post.objects.live()
-        context['recent_posts'] = Post.objects.live()
+        context['posts'] = ArticlePage.objects.live()
+        context['recent_posts'] = ArticlePage.objects.live()
         return context

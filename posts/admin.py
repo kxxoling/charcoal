@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post
+from .models import ArticlePage
 
 
-admin.register(Post)
+admin.register(ArticlePage)
