@@ -35,7 +35,8 @@
 <div id="disqus_thread"></div>
 {% endblock %}
 
-
 {% block extra_js %}
-<!--<script type="text/javascript" src="//kxxoling-charcoal.disqus.com/embed.js"></script>-->
+  {% if not debug %}
+    <script type="text/javascript" src="//kxxoling-charcoal.disqus.com/embed.js"></script>
+  {% endif %}
 {% endblock %}

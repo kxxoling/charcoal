@@ -134,3 +134,8 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'sass --scss {infile} {outfile}'),
     ('text/stylus', 'stylus < {infile} > {outfile}'),
 )
+
+INTERNAL_IPS = (
+    '0.0.0.0',
+    '127.0.0.1',
+)
