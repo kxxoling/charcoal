@@ -36,7 +36,8 @@ class BasePageModel(Page):
 
     def get_context(self, request):
         context = super(BasePageModel, self).get_context(request)
-        context['recent_posts'] = Page.objects.type((ArticlePage, GalleryPage,)).live()[:5]
+        context['recent_posts'] = Page.objects.type((
+            ArticlePage, GalleryPage, VideoPage, SharedLinkPage)).live()[:5]
         return context
 
 
@@ -67,6 +68,27 @@ class GalleryPage(BasePageModel):
 
     content_panels = BasePageModel.content_panels + [
         InlinePanel('gallery_images', label="Gallery images"),
+    ]
+
+
+class VideoPage(BasePageModel):
+    link = CharField(max_length=300, null=False, blank=False)
+    site = CharField(max_length=20, null=True, blank=True)
+
+    content_panels = BasePageModel.content_panels + [
+        FieldPanel('link'),
+    ]
+
+
+class SharedLinkPage(BasePageModel):
+    link = CharField(max_length=300, null=False, blank=False)
+    summary = CharField(max_length=300, null=False, blank=False)
+    cover_image = ForeignKey(Image, related_name='+', on_delete=SET_NULL, null=True, blank=True)
+
+    content_panels = BasePageModel.content_panels + [
+        FieldPanel('link'),
+        FieldPanel('summary'),
+        ImageChooserPanel('cover_image'),
     ]
 
 
