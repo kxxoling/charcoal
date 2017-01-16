@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags compress static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+  {% compress css inline %}
+    <link rel="stylesheet" type="text/stylus" href="{% static 'styles/post.styl' %}"/>
+  {% endcompress %}
+{% endblock %}
+
+{% block content %}
+<div class="content is-medium">
+  <h1 class="title"><a href="">{{ page.title }}</a></h1>
+  <div class="tags">
+    {% for tag in page.tags.all %}
+    <span class="tag is-primary">
+      <a href="">{{ tag.name }}</a>
+    </span>
+    {% endfor %}
+  </div>
+
+  {% block content_body %}{% endblock %}
+
+
+  <div class="time-container level">
+    <div class="level-left"><label class="time-label">Posted at: </label><span class="posted-at">{{ page.datetime_posted | date:'Y-m-d H:i' }}</span></div>
+    <div class="level-right"><label class="time-label">Edited at: </label><span class="edited-at">{{ page.datetime_edited | date:'Y-m-d H:i' }}</span></div>
+  </div>
+
+</div>
+<div id="disqus_thread"></div>
+{% endblock %}
+
+{% block extra_js %}
+  {% if not debug %}
+    <script type="text/javascript" src="//kxxoling-charcoal.disqus.com/embed.js"></script>
+  {% endif %}
+{% endblock %}

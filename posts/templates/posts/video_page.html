@@ -1,26 +1,8 @@
-{% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags compress static %}
+{% extends "posts/_base_page.html" %}
 
-{% block body_class %}template-homepage{% endblock %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
-
-{% block extra_css %}
-  {% compress css inline %}
-    <link rel="stylesheet" type="text/stylus" href="{% static 'styles/post.styl' %}"/>
-  {% endcompress %}
-{% endblock %}
-
-{% block content %}
-<div class="content is-medium">
-  <h1>{{ page.title }}</h1>
-  <div class="tags">
-    {% for name in page.tag_names %}
-    <span class="tag is-primary">
-      <a href="">{{ name }}</a>
-    </span>
-    {% endfor %}
-  </div>
-
+{% block content_body %}
   <div class="video-container">
     {{ page.link }}
   </div>
@@ -29,14 +11,4 @@
     <label>Posted at: </label><span class="posted-at">{{ page.datetime_posted | date:'Y-m-d H:i' }}</span>
     <label>Edited at: </label><span class="edited-at">{{ page.datetime_edited | date:'Y-m-d H:i' }}</span>
   </div>
-
-</div>
-<div id="disqus_thread"></div>
-{% endblock %}
-
-
-{% block extra_js %}
-  {% if not debug %}
-    <script type="text/javascript" src="//kxxoling-charcoal.disqus.com/embed.js"></script>
-  {% endif %}
 {% endblock %}
