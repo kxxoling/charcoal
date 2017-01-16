@@ -17,7 +17,7 @@ from wagtail.wagtailsearch import index
 
 
 class Tag(TaggedItemBase):
-    content_object = ParentalKey('ArticlePage', related_name='articles')
+    content_object = ParentalKey('wagtailcore.Page', related_name='pages')
 
 
 class BasePageModel(Page):
@@ -28,7 +28,7 @@ class BasePageModel(Page):
     datetime_edited = DateTimeField('Edit time', auto_now=True)
     tags = ClusterTaggableManager(through=Tag, blank=True, related_name='+')
 
-    panels = Page.content_panels +[
+    content_panels = Page.content_panels + [
          MultiFieldPanel([
              FieldPanel('tags'),
          ]),
