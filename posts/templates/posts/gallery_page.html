@@ -12,7 +12,7 @@
 
 {% block content %}
 <div class="content is-medium">
-  <h1>{{ page.title }}</h1>
+  <h1>{{ page.intro }}</h1>
   <div class="tags">
     {% for name in page.tag_names %}
     <span class="tag is-primary">
@@ -21,9 +21,18 @@
     {% endfor %}
   </div>
 
-  {% if page.body %}
-    <div class="post-body">{{ page.body | richtext }}</div>
-  {% endif %}
+  <div class="gallery">
+    {% for img in page.gallery_images.all %}
+      <figure class="gallery-image">
+        {% image img.image original as orig_img %}
+        {% image img.image height-250 as thumb %}
+        <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
+        {% if img.caption %}
+          <figcaption>{{ img.caption }}</figcaption>
+        {% endif %}
+      </figure>
+    {% endfor %}
+  </div>
 
   <div class="time-container">
     <label>Posted at: </label><span class="posted-at">{{ page.datetime_posted | date:'Y-m-d H:i' }}</span>
