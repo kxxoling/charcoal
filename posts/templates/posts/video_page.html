@@ -6,9 +6,4 @@
   <div class="video-container">
     {{ page.link }}
   </div>
-
-  <div class="time-container">
-    <label>Posted at: </label><span class="posted-at">{{ page.datetime_posted | date:'Y-m-d H:i' }}</span>
-    <label>Edited at: </label><span class="edited-at">{{ page.datetime_edited | date:'Y-m-d H:i' }}</span>
-  </div>
 {% endblock %}
