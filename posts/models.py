@@ -70,6 +70,11 @@ class GalleryPage(BasePageModel):
         InlinePanel('gallery_images', label="Gallery images"),
     ]
 
+    @property
+    def gallery_chunks(self, chunk_size=4):
+        images = self.gallery_images.all()
+        return [images[x: x+chunk_size] for x in range(0, len(images), chunk_size)]
+
 
 class VideoPage(BasePageModel):
     link = CharField(max_length=300, null=False, blank=False)

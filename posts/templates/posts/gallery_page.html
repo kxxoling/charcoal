@@ -4,15 +4,25 @@
 
 {% block content_body %}
   <div class="gallery">
-    {% for img in page.gallery_images.all %}
-      <figure class="gallery-image">
-        {% image img.image original as orig_img %}
-        {% image img.image height-250 as thumb %}
-        <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
-        {% if img.caption %}
-          <figcaption>{{ img.caption }}</figcaption>
-        {% endif %}
-      </figure>
-    {% endfor %}
+
+    <div class="tile is-ancestor">
+      {% for chunk in page.gallery_chunks %}
+        <div class="tile is-12 is-parent">
+          {% for img in chunk %}
+            <div class="tile is-child box">
+              <figure class="gallery-image">
+                {% image img.image original as orig_img %}
+                {% image img.image height-250 as thumb %}
+                <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
+                {% if img.caption %}
+                  <figcaption>{{ img.caption }}</figcaption>
+                {% endif %}
+              </figure>
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+
   </div>
 {% endblock %}
