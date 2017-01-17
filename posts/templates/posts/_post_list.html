@@ -4,36 +4,76 @@
   <link rel="stylesheet" type="text/stylus" href="{% static 'styles/post.styl' %}"/>
 {% endcompress %}
 
-{% for post in posts %}
+{% for p in posts %}
   <section class="section content">
     <div class="container">
       <div class="heading">
         <h1 class="title">
-          <a href="{% pageurl post %}">{{ post.title }}</a>
+          <a href="{% pageurl p %}">{{ p.title }}</a>
         </h1>
-        <div class="tag-container">
-          {% for name in post.tag_names %}
-          <span class="tag is-primary">
-            <a href="">{{ name }}</a>
-          </span>
+
+        <div class="tags">
+          {% for tag in page.tags.all %}
+            <span class="tag is-primary">
+              <a href="">{{ tag.name }}</a>
+            </span>
           {% endfor %}
         </div>
-        <h2 class="subtitle">
-          {{ post.intro }}
-        </h2>
 
-        {% with post.gallery_images.first as img %}
-          <figure class="gallery-image">
-            {% image img.image original as orig_img %}
-            {% image img.image height-250 as thumb %}
-            <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
-            {% if img.caption %}
-              <figcaption>{{ img.caption }}</figcaption>
-            {% endif %}
-          </figure>
-        {% endwith %}
+        <div class="content-body">
+          {% if p.videopage %}
+            {% with p.videopage as page %}
+              {% with page.cover_image as img %}
+                <figure class="gallery-image">
+                  {% image img.image original as orig_img %}
+                  {% image img.image height-250 as thumb %}
+                  <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
+                  {% if img.caption %}
+                    <figcaption>{{ img.caption }}</figcaption>
+                  {% endif %}
+                </figure>
+              {% endwith %}
+            {% endwith %}
+          {% endif %}
 
-        {{ post.body | richtext }}
+          {% if p.articlepage %}
+            {% with p.articlepage as page %}
+              {% with page.cover_image as img %}
+                <figure class="gallery-image">
+                  {% image img.image original as orig_img %}
+                  {% image img.image height-250 as thumb %}
+                  <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
+                  {% if img.caption %}
+                    <figcaption>{{ img.caption }}</figcaption>
+                  {% endif %}
+                </figure>
+              {% endwith %}
+
+              {{ page.body | richtext }}
+            {% endwith %}
+          {% endif %}
+
+          {% if p.sharedlinkpage %}
+            {% with p.sharedlinkpage as page %}
+              <p class="link-summary">{{ page.summary | richtext}}</p>
+            {% endwith %}
+          {% endif %}
+
+          {% if p.gallerypage %}
+            {% with p.gallerypage as page %}
+              {% with page.gallery_images.first as img %}
+                <figure class="gallery-image">
+                  {% image img.image original as orig_img %}
+                  {% image img.image height-250 as thumb %}
+                  <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
+                  {% if img.caption %}
+                    <figcaption>{{ img.caption }}</figcaption>
+                  {% endif %}
+                </figure>
+              {% endwith %}
+            {% endwith %}
+          {% endif %}
+        </div>
       </div>
     </div>
   </section>
