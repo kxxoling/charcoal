@@ -24,14 +24,13 @@
           {% if p.videopage %}
             {% with p.videopage as page %}
               {% with page.cover_image as img %}
-                <figure class="gallery-image">
-                  {% image img.image original as orig_img %}
-                  {% image img.image height-250 as thumb %}
-                  <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
-                  {% if img.caption %}
-                    <figcaption>{{ img.caption }}</figcaption>
-                  {% endif %}
-                </figure>
+                {% if img %}
+                  <figure class="gallery-image">
+                    {% image img original as orig_img %}
+                    {% image img height-250 as thumb %}
+                    <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
+                  </figure>
+                {% endif %}
               {% endwith %}
             {% endwith %}
           {% endif %}
@@ -39,14 +38,13 @@
           {% if p.articlepage %}
             {% with p.articlepage as page %}
               {% with page.cover_image as img %}
-                <figure class="gallery-image">
-                  {% image img.image original as orig_img %}
-                  {% image img.image height-250 as thumb %}
-                  <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
-                  {% if img.caption %}
-                    <figcaption>{{ img.caption }}</figcaption>
-                  {% endif %}
-                </figure>
+                {% if img %}
+                  <figure class="gallery-image">
+                    {% image img original as orig_img %}
+                    {% image img height-250 as thumb %}
+                    <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
+                  </figure>
+                {% endif %}
               {% endwith %}
 
               {{ page.body | richtext }}
@@ -66,9 +64,6 @@
                   {% image img.image original as orig_img %}
                   {% image img.image height-250 as thumb %}
                   <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
-                  {% if img.caption %}
-                    <figcaption>{{ img.caption }}</figcaption>
-                  {% endif %}
                 </figure>
               {% endwith %}
             {% endwith %}
