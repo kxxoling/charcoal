@@ -119,6 +119,10 @@ MEDIA_URL = '/media/'
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "charcoal"
+WAGTAIL_USAGE_COUNT_ENABLED = True
+
+WAGTAILADMIN_NOTIFICATION_FROM_EMAIL = 'charcoal@windrunner.me'
+WAGTAILADMIN_NOTIFICATION_USE_HTML = True
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
