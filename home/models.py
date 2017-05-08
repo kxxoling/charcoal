@@ -32,7 +32,12 @@ def gen_list_page(model, app_label='', module='home'):
         setattr(Meta, 'app_label', app_label)
 
     # Set up a dictionary to simulate declarations within a class
-    attrs = {'__module__': module, 'Meta': Meta, '_page_types': (model,)}
+    attrs = {
+        '__module__': module,
+        'Meta': Meta,
+        '_page_types': (model,),
+        'subpage_types': (model,),
+    }
 
     return type(name, (BaseIndexPage,), attrs)
 
