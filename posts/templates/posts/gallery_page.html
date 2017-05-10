@@ -5,11 +5,11 @@
 {% block content_body %}
   <div class="gallery">
 
-    <div class="tile is-ancestor">
+    <div class="columns">
       {% for chunk in page.gallery_chunks %}
-        <div class="tile is-12 is-parent">
+        <div class="column">
           {% for img in chunk %}
-            <div class="tile is-child box">
+            <div class="box is-one-quarter">
               <figure class="gallery-image">
                 {% image img.image original as orig_img %}
                 {% image img.image height-250 as thumb %}
