@@ -9,10 +9,21 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 # Application definition
 INSTALLED_APPS = [
-    'home',
-    'posts',
-    'search',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
 
+INSTALLED_APPS += [
+    'modelcluster',
+    'taggit',
+    'compressor',
+]
+
+INSTALLED_APPS += [
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
     'wagtail.wagtailembeds',
@@ -24,17 +35,13 @@ INSTALLED_APPS = [
     'wagtail.wagtailsearch',
     'wagtail.wagtailadmin',
     'wagtail.wagtailcore',
+]
 
-    'modelcluster',
-    'taggit',
-    'compressor',
-
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+INSTALLED_APPS += [
+    'custom',
+    'home',
+    'posts',
+    'search',
 ]
 
 MIDDLEWARE = [
@@ -123,6 +130,8 @@ WAGTAIL_USAGE_COUNT_ENABLED = True
 
 WAGTAILADMIN_NOTIFICATION_FROM_EMAIL = 'charcoal@windrunner.me'
 WAGTAILADMIN_NOTIFICATION_USE_HTML = True
+
+WAGTAILIMAGES_IMAGE_MODEL = 'custom.SourcedImage'
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash

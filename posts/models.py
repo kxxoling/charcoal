@@ -12,8 +12,9 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailimages.models import Image
 from wagtail.wagtailsearch import index
+
+from custom.models import SourcedImage as Image
 
 
 class Tag(TaggedItemBase):
@@ -100,13 +101,11 @@ class SharedLinkPage(BasePageModel):
 class GalleryImage(Orderable):
     page = ParentalKey(GalleryPage, related_name='gallery_images')
     image = ForeignKey(
-        'wagtailimages.Image', on_delete=CASCADE, related_name='+'
+        'custom.SourcedImage', on_delete=CASCADE, related_name='+'
     )
     caption = CharField(blank=True, max_length=250)
-    source = CharField(blank=True, null=True, max_length=300)
 
     panels = [
         ImageChooserPanel('image'),
         FieldPanel('caption'),
-        FieldPanel('source'),
     ]
