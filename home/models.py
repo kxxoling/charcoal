@@ -13,8 +13,8 @@ class BaseIndexPage(Page):
 
     def get_context(self, request):
         context = super(BaseIndexPage, self).get_context(request)
-        context['recent_posts'] = Page.objects.type(PAGE_TYPES).live()
-        context['posts'] = Page.objects.type(self._page_types).live()
+        context['recent_posts'] = Page.objects.type(PAGE_TYPES).live().order_by('-first_published_at')[:5]
+        context['posts'] = Page.objects.type(self._page_types).live().order_by('-first_published_at')[:10]
         return context
 
     def get_template(self, request):
