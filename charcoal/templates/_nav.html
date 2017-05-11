@@ -19,14 +19,20 @@
           <a class="nav-item is-tab is-hidden-tablet">Pricing</a>
           <a class="nav-item is-tab is-hidden-tablet">About</a>
           <span class="nav-item is-tab">
-        <form class="control has-icon">
-          <input class="input is-midium" type="text" placeholder="Search">
-          <span class="icon is-small">
-            <i type="submit" class="fa fa-search"></i>
+            <form class="control has-icon">
+              <input class="input is-midium" type="text" placeholder="Search">
+              <span class="icon is-small">
+                <i type="submit" class="fa fa-search"></i>
+              </span>
+            </form>
           </span>
-        </form>
-      </span>
-          <a class="nav-item is-tab">Log out</a>
+          <a class="nav-item is-tab" href="/admin/">
+          {% if user.is_authenticated %}
+            Admin
+          {% else %}
+            Login
+          {% endif %}
+          </a>
         </div>
       </div>
     </nav>
