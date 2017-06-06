@@ -1,6 +1,6 @@
 # Media files
-media
-static/CACHE
+/media
+/dev_media
 
 charcoal/settings/prod.py
 
