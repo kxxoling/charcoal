@@ -10,27 +10,25 @@
 {% endblock %}
 
 {% block content %}
-<div class="content is-medium">
-  <h1 class="title"><a href="">{{ page.title }}</a></h1>
-  <div class="tags">
-    {% for tag in page.tags.all %}
-    <span class="tag is-primary is-medium">
-      <i class="fa fa-tags"></i>
-      <a href="">{{ tag.name }}</a>
-    </span>
-    {% endfor %}
+<div class="section">
+  <div class="content is-medium">
+    <h1 class="title"><a href="">{{ page.title }}</a></h1>
+    <div class="tags">
+      {% for tag in page.tags.all %}
+      <span class="tag is-primary is-medium">
+        <i class="fa fa-tags"></i>
+        <a href="">{{ tag.name }}</a>
+      </span>
+      {% endfor %}
+    </div>
+    <div class="content-wrapper">{% block content_body %}{% endblock %}</div>
+    <div class="time-container level">
+      <div class="level-left"><label class="time-label">Posted at: </label><span class="posted-at">{{ page.datetime_posted | date:'Y-m-d H:i' }}</span></div>
+      <div class="level-right"><label class="time-label">Edited at: </label><span class="edited-at">{{ page.datetime_edited | date:'Y-m-d H:i' }}</span></div>
+    </div>
   </div>
-
-  <div class="content-wrapper">{% block content_body %}{% endblock %}</div>
-
-
-  <div class="time-container level">
-    <div class="level-left"><label class="time-label">Posted at: </label><span class="posted-at">{{ page.datetime_posted | date:'Y-m-d H:i' }}</span></div>
-    <div class="level-right"><label class="time-label">Edited at: </label><span class="edited-at">{{ page.datetime_edited | date:'Y-m-d H:i' }}</span></div>
-  </div>
-
+  <div id="disqus_thread"></div>
 </div>
-<div id="disqus_thread"></div>
 {% endblock %}
 
 {% block extra_js %}
