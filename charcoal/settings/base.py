@@ -42,6 +42,7 @@ INSTALLED_APPS += [
     'home',
     'posts',
     'search',
+    'tags',
 ]
 
 MIDDLEWARE = [
