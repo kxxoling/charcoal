@@ -19,6 +19,7 @@ urlpatterns = [
 
     url(r'^search/$', search_views.search, name='search'),
     url(r'^tags/$', tags_views.show_tags, name='tags'),
+    url(r'^tag/([0-9]+)$', tags_views.show_tagged_figures, name='tagged_figures'),
 
     url(r'', include(wagtail_urls)),
 ]

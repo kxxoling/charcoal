@@ -10,7 +10,7 @@
     <div class="content">
       <p>
         {% for tag in tags %}
-          <a class="tag is-primary is-medium">{{ tag }}</a>
+          <a class="tag is-primary is-medium" href="{% url 'tagged_figures' tag.id %}">{{ tag }}</a>
         {% endfor %}
       </p>
     </div>

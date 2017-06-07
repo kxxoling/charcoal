@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-tagged-figures{% endblock %}
+
+{% block title %}Tagged Figures{% endblock %}
+
+{% block content %}
+  <div class="section content">
+    <span class="tag is-large is-success">{{ tag }}</span>
+    <div>
+    {% for img in figures %}
+      <figure class="gallery-image">
+        {% image img original as orig_img %}
+        {% image img height-250 as thumb %}
+        <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
+        {% if img.caption %}
+          <figcaption>{{ img.caption  }}</figcaption>
+        {% endif %}
+      </figure>
+    {% endfor %}
+    </div>
+  </div>
+{% endblock %}
+
