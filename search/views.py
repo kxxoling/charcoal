@@ -8,7 +8,7 @@ from wagtail.wagtailsearch.models import Query
 
 
 def search(request):
-    search_query = request.GET.get('query', None)
+    search_query = request.GET.get('s', None)
     page = request.GET.get('page', 1)
 
     # Search
@@ -24,13 +24,14 @@ def search(request):
     # Pagination
     paginator = Paginator(search_results, 10)
     try:
-        search_results = paginator.page(page)
+        posts = paginator.page(page)
     except PageNotAnInteger:
-        search_results = paginator.page(1)
+        posts = paginator.page(1)
     except EmptyPage:
-        search_results = paginator.page(paginator.num_pages)
+        posts = paginator.page(paginator.num_pages)
 
     return render(request, 'search/search.html', {
         'search_query': search_query,
-        'search_results': search_results,
+        'posts': posts,
     })
+

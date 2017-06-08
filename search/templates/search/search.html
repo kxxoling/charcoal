@@ -12,66 +12,23 @@
       <div class="level-left">
         <div class="level-item">
           <p class="subtitle is-5">
-            <strong>123</strong> posts
+            <strong>{{ posts.paginator.count }}</strong> posts found!
           </p>
         </div>
+      </div>
+      <div class="level-left">
         <div class="level-item">
-          <p class="control has-addons">
-            <input class="input" type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+          <form class="control has-addons" action="/search/">
+            <input class="input" type="text" name="s"{% if search_query %} value="{{ search_query | safe }}"{% endif %}>
             <input type="submit" value="Search" class="button">
-
-          </p>
+          </form>
         </div>
       </div>
     </nav>
 
-    {% if search_results %}
-        <ul>
-            {% for result in search_results %}
-                <li>
-                    <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
-                    {% if result.search_description %}
-                        {{ result.search_description|safe }}
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-
-        <nav class="pagination">
-
-        {% if search_results.has_previous %}
-        <a class="button" href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
-        {% endif %}
-
-        {% if search_results.has_next %}
-        <a class="button" href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
-        {% endif %}
-          <ul>
-            <li>
-              <a class="button">1</a>
-            </li>
-            <li>
-              <span>...</span>
-            </li>
-            <li>
-              <a class="button">45</a>
-            </li>
-            <li>
-              <a class="button is-primary">46</a>
-            </li>
-            <li>
-              <a class="button">47</a>
-            </li>
-            <li>
-              <span>...</span>
-            </li>
-            <li>
-              <a class="button">86</a>
-            </li>
-          </ul>
-        </nav>
-
-    {% elif search_query %}
-        No results found
+    {% if posts %}
+      {% include 'posts/_post_list.html' with posts=posts %}
+    {% else %}
+      No results found
     {% endif %}
 {% endblock %}
