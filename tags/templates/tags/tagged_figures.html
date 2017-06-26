@@ -1,14 +1,19 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load static compress wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-tagged-figures{% endblock %}
+{% block extra_css %}
+  {% compress css inline %}
+    <link rel="stylesheet" type="text/stylus" href="{% static 'styles/tagged_figures.styl' %}"/>
+  {% endcompress %}
+{% endblock %}
 
 {% block title %}Tagged Figures{% endblock %}
 
 {% block content %}
   <div class="section content">
     <span class="tag is-large is-success">{{ tag }}</span>
-    <div>
+    <div class="tagged-figures">
     {% for img in figures %}
       <figure class="gallery-image">
         {% image img original as orig_img %}
