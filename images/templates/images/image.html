@@ -1,0 +1,34 @@
+{% extends "_base.html" %}
+{% load static compress wagtailimages_tags %}
+
+{% block extra_css %}
+  {% compress css inline %}
+    <link rel="stylesheet" type="text/stylus" href="{% static 'styles/image.styl' %}"/>
+  {% endcompress %}
+{% endblock %}
+
+{% block body_class %}template-images{% endblock %}
+
+{% block title %}images{% endblock %}
+
+{% block content %}
+  <div class="columns">
+    <section class="image-container column is-two-thirds">
+      <figure class="image">
+        {% image img original as orig_img %}
+        <img {{ orig_img.attrs }} />
+        {% if img.caption %}
+          <figcaption>{{ img.caption }}</figcaption>
+        {% endif %}
+      </figure>
+    </section>
+    <section class="comment column is-one-third" id="disqus_thread"><h4>Loading comments...</h4></section>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  {% if not debug %}
+    <script type="text/javascript" src="//kxxoling-charcoal.disqus.com/embed.js"></script>
+  {% endif %}
+{% endblock %}
+

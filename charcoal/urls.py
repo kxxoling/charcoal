@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^tags/$', tags_views.show_tags, name='tags'),
     url(r'^tag/([0-9]+)$', tags_views.show_tagged_figures, name='tagged_figures'),
     url(r'^images/$', images_views.show_images, name='images'),
+    url(r'^images/([0-9]+)/$', images_views.show_image, name='show_image'),
 
     url(r'', include(wagtail_urls)),
 ]

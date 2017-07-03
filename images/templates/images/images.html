@@ -15,7 +15,7 @@
   {% if images %}
     <div class="content images">
       {% for img in images %}
-        <a class="image is-primary is-medium" href="">
+        <a class="image is-primary is-medium" href="{% url 'show_image' img.id %}">
           <figure class="gallery-image">
             {% image img original as orig_img %}
             {% image img width-300 as thumb %}

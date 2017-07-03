@@ -25,3 +25,9 @@ def show_images(request):
         'images': images,
     })
 
+def show_image(request, image_id):
+    image = get_object_or_404(Image, pk=image_id)
+    return render(request, 'images/image.html', {
+        'img': image,
+    })
+
