@@ -1,0 +1,53 @@
+{% extends "_base.html" %}
+{% load static compress wagtailimages_tags %}
+
+{% block extra_css %}
+  {% compress css inline %}
+    <link rel="stylesheet" type="text/stylus" href="{% static 'styles/images.styl' %}"/>
+  {% endcompress %}
+{% endblock %}
+
+{% block body_class %}template-images{% endblock %}
+
+{% block title %}images{% endblock %}
+
+{% block content %}
+  {% if images %}
+    <div class="content images">
+      {% for img in images %}
+        <a class="image is-primary is-medium" href="">
+          <figure class="gallery-image">
+            {% image img original as orig_img %}
+            {% image img width-300 as thumb %}
+            <img {{ thumb.attrs }} />
+            {% if img.caption %}
+              <figcaption>{{ img.caption  }}</figcaption>
+            {% endif %}
+          </figure>
+        </a>
+      {% endfor %}
+    </div>
+
+    <nav class="pagination">
+      <ul>
+        {% if images.has_previous %}
+        <li><a class="button" href="{% url 'images' %}">{{ '1 <<' }}</a></li>
+        {% endif %}
+        {% if images.has_previous and images.previous_page_number > 1 %}
+          <li><a class="button" href="{% url 'images' %}?page={{ images.previous_page_number }}">Previous</a></li>
+        {% endif %}
+
+        <li><a class="button is-primary">{{ images.number }}</a></li>
+
+        {% if images.has_next and images.next_page_number < images.paginator.num_pages %}
+          <li><a class="button" href="{% url 'images' %}?page={{ images.next_page_number }}">Next</a></li>
+        {% endif %}
+        {% if images.has_next%}
+        <li><a class="button" href="{% url 'images' %}?page={{ images.paginator.num_pages }}">{{ '>>' }}{{ images.paginator.num_pages }}</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+
+  {% elif image %} No image found! {% endif %}
+{% endblock %}
+

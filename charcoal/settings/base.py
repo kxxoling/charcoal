@@ -43,6 +43,7 @@ INSTALLED_APPS += [
     'posts',
     'search',
     'tags',
+    'images',
 ]
 
 MIDDLEWARE = [

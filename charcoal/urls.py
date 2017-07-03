@@ -6,6 +6,7 @@ from django.contrib import admin
 
 from search import views as search_views
 from tags import views as tags_views
+from images import views as images_views
 
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
@@ -20,6 +21,7 @@ urlpatterns = [
     url(r'^search/$', search_views.search, name='search'),
     url(r'^tags/$', tags_views.show_tags, name='tags'),
     url(r'^tag/([0-9]+)$', tags_views.show_tagged_figures, name='tagged_figures'),
+    url(r'^images/$', images_views.show_images, name='images'),
 
     url(r'', include(wagtail_urls)),
 ]
