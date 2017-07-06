@@ -22,7 +22,19 @@
         {% endif %}
       </figure>
     </section>
-    <section class="comment column is-one-third" id="disqus_thread"><h4>Loading comments...</h4></section>
+    <section class="right column is-one-third">
+      <div class="tags">
+        {% for tag in img.tags.all %}
+        <span class="tag is-primary is-medium">
+          <i class="fa fa-tags"></i>
+          <a href="{% url 'tagged_figures' tag.id %}">{{ tag.name }}</a>
+        </span>
+        {% endfor %}
+      </div>
+      <div class="comment" id="disqus_thread">
+        <h4>Loading comments...</h4>
+      </div>
+    </section>
   </div>
 {% endblock %}
 
