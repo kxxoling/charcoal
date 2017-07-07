@@ -12,7 +12,12 @@
 
 {% block content %}
   <div class="section content">
-    <span class="tag is-large is-success">{{ tag }}</span>
+    <div class="tag-container">
+      <span class="tag is-large is-success">{{ tag }}</span>
+      {% if user.is_superuser %}
+        <a class="edit" href="{% url 'admin:taggit_tag_change' tag.id %}">Edit</a>
+      {% endif %}
+    </div>
     <div class="tagged-figures">
     {% for img in figures %}
       <figure class="gallery-image">
