@@ -12,7 +12,7 @@
             <figure class="gallery-image">
               {% image img.image original as orig_img %}
               {% image img.image height-250 as thumb %}
-              <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
+              <a class="" href="{% url 'show_image' img.image.id %}"><img {{ thumb.attrs }} /></a>
               {% if img.caption %}
                 <figcaption>{{ img.caption }}</figcaption>
               {% endif %}

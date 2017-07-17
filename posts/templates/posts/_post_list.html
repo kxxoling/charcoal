@@ -28,7 +28,7 @@
                   <figure class="gallery-image">
                     {% image img original as orig_img %}
                     {% image img height-250 as thumb %}
-                    <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
+                    <img {{ thumb.attrs }} />
                   </figure>
                 {% endif %}
               {% endwith %}
@@ -42,7 +42,7 @@
                   <figure class="gallery-image">
                     {% image img original as orig_img %}
                     {% image img height-250 as thumb %}
-                    <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
+                    <img {{ thumb.attrs }} />
                   </figure>
                 {% endif %}
               {% endwith %}
@@ -63,7 +63,7 @@
                 <figure class="gallery-image">
                   {% image img.image original as orig_img %}
                   {% image img.image height-250 as thumb %}
-                  <a href="{{ orig_img.url }}"><img {{ thumb.attrs }} /></a>
+                  <img {{ thumb.attrs }} />
                 </figure>
               {% endwith %}
             {% endwith %}
