@@ -1,5 +1,8 @@
 # coding: utf-8
 from django.db.models import CharField, ForeignKey, BooleanField, IntegerField
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+
 from wagtail.wagtailimages.models import Image as _Image, Rendition as _Rendition
 from wagtail.wagtailimages.models import AbstractImage, AbstractRendition
 
@@ -33,4 +36,12 @@ class ImageRendition(AbstractRendition):
         unique_together = (
             ('image', 'filter_spec', 'focal_point_key'),
         )
+
+
+@receiver(pre_save, sender=SourcedImage)
+def update_image(sender, instance, **kw):
+    if instance.orig_link and instance.orig_link.startswith('https://www.pixiv.net/'):
+        instance.pixiv_id = int(instance.orig_link.rsplit('=', 1)[-1])
+    if not instance.orig_link and instance.pixiv_id:
+        instance.orig_link = instance.get_pixiv_link()
 
