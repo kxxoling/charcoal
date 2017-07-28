@@ -40,8 +40,12 @@ class ImageRendition(AbstractRendition):
 
 @receiver(pre_save, sender=SourcedImage)
 def update_image(sender, instance, **kw):
+    # Set pixiv ID from link
     if instance.orig_link and instance.orig_link.startswith('https://www.pixiv.net/'):
         instance.pixiv_id = int(instance.orig_link.rsplit('=', 1)[-1])
+    # Set link from pixiv ID
     if not instance.orig_link and instance.pixiv_id:
         instance.orig_link = instance.get_pixiv_link()
+    # Clean file name
+    instance.title = instance.title.strip('.jpg').strip('.png').strip('.gif').strip()
 
