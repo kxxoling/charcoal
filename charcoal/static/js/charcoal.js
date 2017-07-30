@@ -10,6 +10,10 @@
     active = 'links';
   } else if (path.startsWith('/v/')) {
     active = 'videos';
+  } else if (path.startsWith('/tags/')) {
+    active = 'tags';
+  } else if (path.startsWith('/images/')) {
+    active = 'images';
   } else {
     active = 'home';
   }
