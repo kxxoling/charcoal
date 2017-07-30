@@ -5,4 +5,5 @@
 
 {% block content %}
 {% include 'posts/_post_list.html' with posts=posts %}
+{% include '_pagination.html' with page=posts %}
 {% endblock %}

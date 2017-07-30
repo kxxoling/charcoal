@@ -15,26 +15,7 @@
       </p>
     </div>
 
-    <nav class="pagination">
-      <ul>
-        {% if tags.has_previous %}
-        <li><a class="button" href="{% url 'tags' %}">{{ '1 <<' }}</a></li>
-        {% endif %}
-        {% if tags.has_previous and tags.previous_page_number > 1 %}
-          <li><a class="button" href="{% url 'tags' %}?page={{ tags.previous_page_number }}">Previous</a></li>
-        {% endif %}
-
-        <li><a class="button is-primary">{{ tags.number }}</a></li>
-
-        {% if tags.has_next and tags.next_page_number < tags.paginator.num_pages %}
-          <li><a class="button" href="{% url 'tags' %}?page={{ tags.next_page_number }}">Next</a></li>
-        {% endif %}
-        {% if tags.has_next%}
-        <li><a class="button" href="{% url 'tags' %}?page={{ tags.paginator.num_pages }}">{{ '>>' }}{{ tags.paginator.num_pages }}</a></li>
-        {% endif %}
-      </ul>
-    </nav>
-
-  {% elif tag %} No tag found! {% endif %}
+    {% include '_pagination.html' with page=tags %}
+  {% else %} No tag found! {% endif %}
 {% endblock %}
 

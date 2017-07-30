@@ -28,26 +28,7 @@
       {% endfor %}
     </div>
 
-    <nav class="pagination">
-      <ul>
-        {% if images.has_previous %}
-        <li><a class="button" href="{% url 'images' %}">{{ '1 <<' }}</a></li>
-        {% endif %}
-        {% if images.has_previous and images.previous_page_number > 1 %}
-          <li><a class="button" href="{% url 'images' %}?page={{ images.previous_page_number }}">Previous</a></li>
-        {% endif %}
-
-        <li><a class="button is-primary">{{ images.number }}</a></li>
-
-        {% if images.has_next and images.next_page_number < images.paginator.num_pages %}
-          <li><a class="button" href="{% url 'images' %}?page={{ images.next_page_number }}">Next</a></li>
-        {% endif %}
-        {% if images.has_next%}
-        <li><a class="button" href="{% url 'images' %}?page={{ images.paginator.num_pages }}">{{ '>>' }}{{ images.paginator.num_pages }}</a></li>
-        {% endif %}
-      </ul>
-    </nav>
-
+    {% include '_pagination.html' with page=images %}
   {% elif image %} No image found! {% endif %}
 {% endblock %}
 
