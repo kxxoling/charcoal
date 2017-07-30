@@ -18,9 +18,10 @@ class SourcedImage(AbstractImage):
     pixiv_order = IntegerField(null=True, default=0, blank=True)
 
     is_restricted = BooleanField(null=False, default=False)
+    show = BooleanField(null=False, default=True)
 
     admin_form_fields = _Image.admin_form_fields + (
-        'orig_link', 'pixiv_id', 'pixiv_order', 'is_restricted',
+        'orig_link', 'pixiv_id', 'pixiv_order', 'is_restricted', 'show',
     )
 
     def get_pixiv_link(self):

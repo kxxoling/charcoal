@@ -12,7 +12,7 @@ Image = get_image_model()
 
 
 def show_images(request):
-    image_list = Image.objects.order_by('-id')
+    image_list = Image.objects.filter(show=True).order_by('-id')
     if not request.user.is_superuser:
         image_list = image_list.filter(is_restricted=False)
     paginator = Paginator(image_list, 24)
@@ -30,7 +30,7 @@ def show_images(request):
 
 
 def show_image(request, image_id):
-    image = get_object_or_404(Image, pk=image_id)
+    image = get_object_or_404(Image, pk=image_id, show=True)
     if not request.user.is_superuser and image.is_restricted:
         return HttpResponseForbidden()
     return render(request, 'images/image.html', {
