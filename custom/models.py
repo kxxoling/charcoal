@@ -6,6 +6,8 @@ from django.dispatch import receiver
 from wagtail.wagtailimages.models import Image as _Image, Rendition as _Rendition
 from wagtail.wagtailimages.models import AbstractImage, AbstractRendition
 
+from .utils import auto_check_image
+
 
 class SourcedImage(AbstractImage):
     class Meta:
@@ -17,8 +19,8 @@ class SourcedImage(AbstractImage):
     pixiv_id = IntegerField(null=True, default=None, blank=True)
     pixiv_order = IntegerField(null=True, default=0, blank=True)
 
-    is_restricted = BooleanField(null=False, default=False)
-    show = BooleanField(null=False, default=True)
+    is_restricted = BooleanField(null=False, default=False, blank=True)
+    show = BooleanField(null=False, default=True, blank=True)
 
     admin_form_fields = _Image.admin_form_fields + (
         'orig_link', 'pixiv_id', 'pixiv_order', 'is_restricted', 'show',
@@ -41,12 +43,5 @@ class ImageRendition(AbstractRendition):
 
 @receiver(pre_save, sender=SourcedImage)
 def update_image(sender, instance, **kw):
-    # Set pixiv ID from link
-    if instance.orig_link and instance.orig_link.startswith('https://www.pixiv.net/'):
-        instance.pixiv_id = int(instance.orig_link.rsplit('=', 1)[-1])
-    # Set link from pixiv ID
-    if not instance.orig_link and instance.pixiv_id:
-        instance.orig_link = instance.get_pixiv_link()
-    # Clean file name
-    instance.title = instance.title.strip('.jpg').strip('.png').strip('.gif').strip()
+    auto_check_image(instance)
 
