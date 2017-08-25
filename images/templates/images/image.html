@@ -1,5 +1,5 @@
 {% extends "_base.html" %}
-{% load static compress wagtailimages_tags %}
+{% load static compress wagtailimages_tags wagtailcore_tags %}
 
 {% block extra_css %}
   {% compress css inline %}
@@ -9,7 +9,7 @@
 
 {% block body_class %}template-images{% endblock %}
 
-{% block title %}images{% endblock %}
+{% block title %}{{ img.title }} - Image{% endblock %}
 
 {% block content %}
   <div class="columns">
@@ -19,6 +19,16 @@
         <img {{ orig_img.attrs }} />
         {% if img.caption %}
           <figcaption>{{ img.caption }}</figcaption>
+        {% endif %}
+        {% if user.is_superuser %}
+            <a class="admin-link link" href="{% url 'wagtailimages:edit' img.id %}">
+              <i class="fa fa-pencil-square-o"></i>
+            </a>
+        {% endif %}
+        {% if img.orig_link %}
+            <a class="external-link link" href="{{ img.orig_link }}" target="_blank">
+              <i class="fa fa-external-link "></i>
+            </a>
         {% endif %}
       </figure>
     </section>
