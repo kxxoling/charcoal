@@ -75,6 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'charcoal.context_processors.template_env',
             ],
         },
     },
@@ -126,7 +127,6 @@ MEDIA_URL = '/media/'
 
 
 # Wagtail settings
-
 WAGTAIL_SITE_NAME = "charcoal"
 WAGTAIL_USAGE_COUNT_ENABLED = True
 
@@ -154,3 +154,7 @@ INTERNAL_IPS = (
     '0.0.0.0',
     '127.0.0.1',
 )
+
+# charcoal settings
+SITE_TITLE = 'Another site of @kxxoling.'
+

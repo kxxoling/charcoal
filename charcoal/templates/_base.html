@@ -22,6 +22,10 @@
           {% if site_name %}- {{ site_name }}{% endif %}
         {% endwith %}
       {% endblock %}
+
+      {% if SITE_TITLE %}
+      - {{ SITE_TITLE }}
+      {% endif %}
     </title>
 
     {% compress css %}
