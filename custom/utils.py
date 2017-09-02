@@ -2,6 +2,20 @@
 import re
 
 
+old_pixiv_image_filename_pattern = re.compile(r'''
+^
+(?P<author>.+)
+\s-\s
+(?P<name>.+)
+\s\(
+(?P<id>\d*)
+\)\s
+(?P<order>\d*)
+(ページ)?
+(\.(?P<ext>jpg|png|jpeg))?
+''', re.VERBOSE)
+
+
 pixiv_image_filename_pattern = re.compile(r'''
 ^\[
 (?P<author>.+)
@@ -11,7 +25,7 @@ pixiv_image_filename_pattern = re.compile(r'''
 (?P<id>\d*)
 \_
 (?P<order>\d*)
-\.(?P<ext>jpg|png|jpeg)
+(\.(?P<ext>jpg|png|jpeg))?
 ''', re.VERBOSE)
 
 
@@ -21,9 +35,9 @@ def auto_check_image(instance):
         instance.is_restricted = False
         instance.show = True
 
-    pixiv_search = pixiv_image_filename_pattern.search(instance.title)
+    pixiv_search = pixiv_image_filename_pattern.search(instance.title) or old_pixiv_image_filename_pattern.search(instance.title)
     if pixiv_search:
-        author, name, pixiv_id, order, ext = pixiv_search.groups()
+        author, name, pixiv_id, order = pixiv_search.groups()[:4]
         instance.title = u'%s - %s' % (author, name)
         instance.pixiv_id = int(pixiv_id)
         instance.pixiv_order = int(order or 0)
