@@ -45,6 +45,11 @@ Deployment
 3. Run a static server for collected static files.
 4. Deploy Charcoal by runngin a WSGI server: ``gunicorn charcoal.wsgi:application``.
 
+Test
+----
+
+Just run ``pytest``.
+
 Demo
 ====
 

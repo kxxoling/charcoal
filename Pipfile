@@ -6,6 +6,7 @@ verify_ssl = true
 django-extensions = "*"
 django-pdb = "*"
 Werkzeug = "*"
+pytest-django = "*"
 
 [packages]
 wagtail = ">=1.12,<2"
