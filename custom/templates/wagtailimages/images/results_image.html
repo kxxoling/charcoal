@@ -1,0 +1,16 @@
+{% comment "online path" %}
+https://github.com/wagtail/wagtail/blob/master/wagtail/wagtailimages/templates/wagtailimages/images/results_image.html
+{% endcomment %}
+
+{% load wagtailimages_tags %}
+
+<div class="image results-image">
+  {% image image max-165x165 class="show-transparency" %}
+  <a class="icon icon-link" href="{% url 'show_image' image.id %}"></a>
+  <div class="results-tags">
+    {% for tag in image.tags.all %}
+      <a class="tag" href="{% url 'tagged_figures' tag.id %}">{{ tag }}</a>
+    {% endfor %}
+  </div>
+</div>
+

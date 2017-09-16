@@ -1,0 +1,9 @@
+{% extends 'wagtailimages/images/index.html' %}
+{% load static compress %}
+
+{% block extra_css %}
+  {{ block.super }}
+  {% compress css inline %}
+    <link rel="stylesheet" type="text/stylus" href="{% static 'styles/watailimages/images/results_image.styl' %}"/>
+  {% endcompress %}
+{% endblock %}

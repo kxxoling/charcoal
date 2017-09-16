@@ -24,6 +24,15 @@ INSTALLED_APPS += [
 ]
 
 INSTALLED_APPS += [
+    'custom',
+    'home',
+    'posts',
+    'search',
+    'tags',
+    'images',
+]
+
+INSTALLED_APPS += [
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
     'wagtail.wagtailembeds',
@@ -35,15 +44,6 @@ INSTALLED_APPS += [
     'wagtail.wagtailsearch',
     'wagtail.wagtailadmin',
     'wagtail.wagtailcore',
-]
-
-INSTALLED_APPS += [
-    'custom',
-    'home',
-    'posts',
-    'search',
-    'tags',
-    'images',
 ]
 
 MIDDLEWARE = [
