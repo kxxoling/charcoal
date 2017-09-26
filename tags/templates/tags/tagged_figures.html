@@ -13,7 +13,7 @@
 {% block content %}
   <div class="section content">
     <div class="tag-container">
-      <span class="tag is-large is-success">{{ tag }}</span>
+        <span class="tag is-large is-success" title="{{ tag }}">{{ tag }}</span>
       {% if user.is_superuser %}
         <a class="edit" href="{% url 'admin:taggit_tag_change' tag.id %}">Edit</a>
       {% endif %}

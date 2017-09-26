@@ -40,7 +40,7 @@
         {% for tag in img.tags.all %}
         <span class="tag is-primary is-medium">
           <i class="fa fa-tags"></i>
-          <a href="{% url 'tagged_figures' tag.id %}">{{ tag.name }}</a>
+		  <a href="{% url 'tagged_figures' tag.id %}" title="{{ tag.name }}">{{ tag.name }}</a>
         </span>
         {% endfor %}
       </div>

@@ -9,7 +9,7 @@ https://github.com/wagtail/wagtail/blob/master/wagtail/wagtailimages/templates/w
   <a class="icon icon-link" href="{% url 'show_image' image.id %}"></a>
   <div class="results-tags">
     {% for tag in image.tags.all %}
-      <a class="tag" href="{% url 'tagged_figures' tag.id %}">{{ tag }}</a>
+    <a class="tag" href="{% url 'tagged_figures' tag.id %}" title="{{ tag.name }}">{{ tag.name }}</a>
     {% endfor %}
   </div>
 </div>
