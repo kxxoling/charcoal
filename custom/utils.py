@@ -29,6 +29,19 @@ pixiv_image_filename_pattern = re.compile(r'''
 ''', re.VERBOSE)
 
 
+twitter_image_filename_pattern = re.compile(r'''
+^\[
+(?P<author>.+)
+\]\_
+(?P<pk>\d+)
+\_
+(?P<name>.*)
+\_
+(?P<hash>\w*)
+(\.(?P<ext>jpg|png|jpeg))?
+''', re.VERBOSE)
+
+
 def auto_check_image(instance):
     # Overwrite image default show, is_restricted attr when it's created.
     if instance.id is None:
@@ -44,7 +57,13 @@ def auto_check_image(instance):
         instance.orig_link = instance.get_pixiv_link()
         return
     else:
-        instance.title = instance.title.strip('.jpg').strip('.png').strip('.gif').strip().strip('_')
+        twitter_search = twitter_image_filename_pattern.search(instance.title)
+        if twitter_search:
+            author, twitter_pk, name, hash_ = twitter_search.groups()[:4]
+            instance.title = u'%s - %s - %s' % (author, name, hash_)
+            instance.orig_link = instance.orig_link or 'https://twitter.com/%s/status/%s' % (author, twitter_pk)
+        else:
+            instance.title = instance.title.strip('.jpg').strip('.png').strip('.gif').strip().strip('_')
 
     # Set pixiv ID from link
     if instance.orig_link and instance.orig_link.startswith('https://www.pixiv.net/'):

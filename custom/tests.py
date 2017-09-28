@@ -6,6 +6,7 @@ import re
 import pytest
 
 from .utils import old_pixiv_image_filename_pattern, pixiv_image_filename_pattern
+from .utils import twitter_image_filename_pattern
 
 
 @pytest.fixture(scope='module')
@@ -64,6 +65,34 @@ def old_pixiv_fixtures():
     )
 
 
+@pytest.fixture(scope='module')
+def twitter_fixtures():
+    return (
+        (
+            '[lidukelaya]_912995296048590848_据说是放一起光环很爽的组合_DKucDZrVAAAPMDE',
+            ('lidukelaya', '912995296048590848', '据说是放一起光环很爽的组合', 'DKucDZrVAAAPMDE'),
+            {
+                'ext': None,
+                'author': 'lidukelaya',
+                'name': '据说是放一起光环很爽的组合',
+                'pk': '912995296048590848',
+                'hash': 'DKucDZrVAAAPMDE',
+            }
+        ),
+        (
+            '[lidukelaya]_912995296048590848_据说是放一起光环很爽的组合_DKucDZrVAAAPMDE.jpg',
+            ('lidukelaya', '912995296048590848', '据说是放一起光环很爽的组合', 'DKucDZrVAAAPMDE', 'jpg'),
+            {
+                'ext': 'jpg',
+                'author': 'lidukelaya',
+                'name': '据说是放一起光环很爽的组合',
+                'pk': '912995296048590848',
+                'hash': 'DKucDZrVAAAPMDE',
+            }
+        ),
+    )
+
+
 def test_pixiv_pattern(pixiv_fixtures):
     for pixiv_fixture in pixiv_fixtures:
         filename, groups, groupdict = pixiv_fixture
@@ -76,7 +105,14 @@ def test_old_pixiv_pattern(old_pixiv_fixtures):
     for fixture in old_pixiv_fixtures:
         filename, groups, groupdict = fixture
         search = old_pixiv_image_filename_pattern.search(filename)
-        print search.groups()
         assert search.groups()[:4] == groups
+        assert search.groupdict() == groupdict
+
+
+def test_twitter_pattern(twitter_fixtures):
+    for fixture in twitter_fixtures:
+        filename, groups, groupdict = fixture
+        search = twitter_image_filename_pattern.search(filename)
+        assert search.groups()[:4] == groups[:4]
         assert search.groupdict() == groupdict
 
