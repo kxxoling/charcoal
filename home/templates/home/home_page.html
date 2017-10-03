@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags pagination %}
 
 {% block body_class %}homepage{% endblock %}
 
 {% block content %}
-{% include 'posts/_post_list.html' with posts=posts %}
-{% include '_pagination.html' with page=posts %}
+  {% include 'posts/_post_list.html' with posts=posts %}
+  {% pagination posts %}
 {% endblock %}

@@ -1,5 +1,5 @@
 {% extends "_base.html" %}
-{% load static compress wagtailimages_tags %}
+{% load static compress wagtailimages_tags pagination %}
 
 {% block extra_css %}
   {% compress css inline %}
@@ -28,7 +28,7 @@
       {% endfor %}
     </div>
 
-    {% include '_pagination.html' with page=images %}
+    {% pagination images %}
   {% elif image %} No image found! {% endif %}
 {% endblock %}
 

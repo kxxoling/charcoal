@@ -77,6 +77,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'charcoal.context_processors.template_env',
             ],
+
+            'libraries':{
+                'pagination': 'charcoal.templatetags.pagination',
+            }
         },
     },
 ]

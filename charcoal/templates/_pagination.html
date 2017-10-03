@@ -1,21 +1,37 @@
 <nav class="pagination">
   <ul>
-    {% if page.has_previous %}
-      <li><a class="button" href="?page={{ page.previous_page_number }}">{{ '<' }}</a></li>
+    {% if has_previous %}
+      <li><a class="button" href="?page={{ previous_page_number }}">{{ '<' }}</a></li>
     {% else %}
     <li class="disabled"><span>{{ '<' }}</span></li>
     {% endif %}
 
-    {% for i in page.paginator.page_range %}
-      {% if page.number == i %}
+    {% if show_start %}
+      <li><a class="button" href="?">{{ start }}</a></li>
+    {% endif %}
+
+    {% if has_left_ellips %}
+      <li class=""><span>...</span></li>
+    {% endif %}
+
+    {% for i in page_range %}
+      {% if current == i %}
         <li class="button is-primary"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
       {% else %}
         <li><a class="button" href="?page={{ i }}">{{ i }}</a></li>
       {% endif %}
     {% endfor %}
 
-    {% if page.has_next %}
-      <li><a class="button" href="?page={{ page.next_page_number }}">{{ '>' }}</a></li>
+    {% if has_right_ellips %}
+      <li class=""><span>...</span></li>
+    {% endif %}
+
+    {% if show_end %}
+      <li><a class="button" href="?page={{ end }}">{{ end }}</a></li>
+    {% endif %}
+
+    {% if has_next %}
+      <li><a class="button" href="?page={{ next_page_number }}">{{ '>' }}</a></li>
     {% else %}
     <li class="disabled"><span>{{ '>' }}</span></li>
     {% endif %}
