@@ -1,5 +1,5 @@
 # coding: utf-8
-from django.db.models import CharField, ForeignKey, BooleanField, IntegerField
+from django.db.models import CharField, ForeignKey, BooleanField, IntegerField, TextField
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
@@ -16,6 +16,8 @@ class SourcedImage(AbstractImage):
     orig_link = CharField(blank=True, null=True, max_length=300)
     source = CharField(blank=True, null=True, max_length=30)
 
+    desc = TextField(blank=True, null=True)
+
     pixiv_id = IntegerField(null=True, default=None, blank=True)
     pixiv_order = IntegerField(null=True, default=0, blank=True)
 
@@ -23,7 +25,7 @@ class SourcedImage(AbstractImage):
     show = BooleanField(null=False, default=True, blank=True)
 
     admin_form_fields = _Image.admin_form_fields + (
-        'orig_link', 'pixiv_id', 'pixiv_order', 'is_restricted', 'show',
+        'orig_link', 'pixiv_id', 'pixiv_order', 'is_restricted', 'show', 'desc',
     )
 
     def get_pixiv_link(self):
