@@ -15,3 +15,7 @@ dev:
 
 serve:
 	gunicorn --workers=4 -D charcoal.wsgi:application
+
+format:
+	yapf -irp -e "./.venv/**" -e "**/migrations/**" **/**.py
+

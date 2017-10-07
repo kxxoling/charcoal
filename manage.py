@@ -4,7 +4,6 @@ from __future__ import absolute_import, unicode_literals
 import os
 import sys
 
-
 if __name__ == "__main__":
     if os.environ.get('PROD'):
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "charcoal.settings.prod")

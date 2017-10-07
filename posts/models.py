@@ -22,6 +22,7 @@ class Tag(TaggedItemBase):
 
 
 class BasePageModel(Page):
+
     class Meta:
         abstract = True
 
@@ -30,21 +31,24 @@ class BasePageModel(Page):
     tags = ClusterTaggableManager(through=Tag, blank=True, related_name='+')
 
     content_panels = Page.content_panels + [
-         MultiFieldPanel([
-             FieldPanel('tags'),
-         ]),
+        MultiFieldPanel([
+            FieldPanel('tags'),
+        ]),
     ]
 
     def get_context(self, request):
         context = super(BasePageModel, self).get_context(request)
-        context['recent_posts'] = Page.objects.type((
-            ArticlePage, GalleryPage, VideoPage, SharedLinkPage)).live().order_by('-first_published_at')[:5]
+        context['recent_posts'] = Page.objects.type(
+            (ArticlePage, GalleryPage, VideoPage, SharedLinkPage)
+        ).live().order_by('-first_published_at')[:5]
         return context
 
 
 class ArticlePage(BasePageModel):
     body = RichTextField(null=False)
-    cover_image = ForeignKey(Image, related_name='articles', on_delete=SET_NULL, null=True, blank=True)
+    cover_image = ForeignKey(
+        Image, related_name='articles', on_delete=SET_NULL, null=True, blank=True
+    )
 
     search_fields = BasePageModel.search_fields + [
         index.SearchField('body'),
@@ -63,9 +67,7 @@ class ArticlePage(BasePageModel):
 class GalleryPage(BasePageModel):
     intro = RichTextField(null=True, blank=True)
 
-    search_fields = BasePageModel.search_fields + [
-        index.SearchField('intro')
-    ]
+    search_fields = BasePageModel.search_fields + [index.SearchField('intro')]
 
     content_panels = BasePageModel.content_panels + [
         InlinePanel('gallery_images', label="Gallery images"),
@@ -74,7 +76,7 @@ class GalleryPage(BasePageModel):
     @property
     def gallery_chunks(self, chunk_size=4):
         images = self.gallery_images.all()
-        return [images[x: x+chunk_size] for x in range(0, len(images), chunk_size)]
+        return [images[x:x + chunk_size] for x in range(0, len(images), chunk_size)]
 
 
 class VideoPage(BasePageModel):
@@ -100,9 +102,7 @@ class SharedLinkPage(BasePageModel):
 
 class GalleryImage(Orderable):
     page = ParentalKey(GalleryPage, related_name='gallery_images')
-    image = ForeignKey(
-        'custom.SourcedImage', on_delete=CASCADE, related_name='+'
-    )
+    image = ForeignKey('custom.SourcedImage', on_delete=CASCADE, related_name='+')
     caption = CharField(blank=True, max_length=250)
 
     panels = [

@@ -1,8 +1,8 @@
 # coding: utf-8
 import re
 
-
-old_pixiv_image_filename_pattern = re.compile(r'''
+old_pixiv_image_filename_pattern = re.compile(
+    r'''
 ^
 (?P<author>.+)
 \s-\s
@@ -13,10 +13,11 @@ old_pixiv_image_filename_pattern = re.compile(r'''
 (?P<order>\d*)
 (ページ)?
 (\.(?P<ext>jpg|png|jpeg))?
-''', re.VERBOSE)
+''', re.VERBOSE
+)
 
-
-pixiv_image_filename_pattern = re.compile(r'''
+pixiv_image_filename_pattern = re.compile(
+    r'''
 ^\[
 (?P<author>.+)
 \]\_
@@ -26,10 +27,11 @@ pixiv_image_filename_pattern = re.compile(r'''
 \_
 (?P<order>\d*)
 (\.(?P<ext>jpg|png|jpeg))?
-''', re.VERBOSE)
+''', re.VERBOSE
+)
 
-
-twitter_image_filename_pattern = re.compile(r'''
+twitter_image_filename_pattern = re.compile(
+    r'''
 ^\[
 (?P<author>.+)
 \]\_
@@ -39,7 +41,8 @@ twitter_image_filename_pattern = re.compile(r'''
 \_
 (?P<hash>\w*)
 (\.(?P<ext>jpg|png|jpeg))?
-''', re.VERBOSE)
+''', re.VERBOSE
+)
 
 
 def auto_check_image(instance):
@@ -48,7 +51,9 @@ def auto_check_image(instance):
         instance.is_restricted = False
         instance.show = True
 
-    pixiv_search = pixiv_image_filename_pattern.search(instance.title) or old_pixiv_image_filename_pattern.search(instance.title)
+    pixiv_search = pixiv_image_filename_pattern.search(
+        instance.title
+    ) or old_pixiv_image_filename_pattern.search(instance.title)
     if pixiv_search:
         author, name, pixiv_id, order = pixiv_search.groups()[:4]
         instance.title = u'%s - %s' % (author, name)
@@ -61,9 +66,12 @@ def auto_check_image(instance):
         if twitter_search:
             author, twitter_pk, name, hash_ = twitter_search.groups()[:4]
             instance.title = u'%s - %s - %s' % (author, name, hash_)
-            instance.orig_link = instance.orig_link or 'https://twitter.com/%s/status/%s' % (author, twitter_pk)
+            instance.orig_link = instance.orig_link or 'https://twitter.com/%s/status/%s' % (
+                author, twitter_pk
+            )
         else:
-            instance.title = instance.title.strip('.jpg').strip('.png').strip('.gif').strip().strip('_')
+            instance.title = instance.title\
+                .strip('.jpg').strip('.png').strip('.gif').strip().strip('_')
 
     # Set pixiv ID from link
     if instance.orig_link and instance.orig_link.startswith('https://www.pixiv.net/'):
@@ -72,4 +80,3 @@ def auto_check_image(instance):
     if not instance.orig_link and instance.pixiv_id:
         instance.orig_link = instance.get_pixiv_link()
     # Clean file name
-

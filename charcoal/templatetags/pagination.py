@@ -1,7 +1,6 @@
 # coding: utf-8
 from django import template
 
-
 register = template.Library()
 
 
@@ -11,9 +10,11 @@ def pagination(lst):
     end = lst.paginator.num_pages + 1
     width = 3
     current = lst.number
-    has_left_ellips = (current-width) > (start+1)
-    has_right_ellips = (end-width) > (current+1)
-    page_range = range(max(start, current-width), current) + [current] + range(current+1, min(end, current+width))
+    has_left_ellips = (current - width) > (start + 1)
+    has_right_ellips = (end - width) > (current + 1)
+    page_range = range(max(start, current - width), current)\
+        + [ current ]\
+        + range(current + 1, min(end, current + width))
 
     return dict(
         start=start,
@@ -29,4 +30,3 @@ def pagination(lst):
         previous_page_number=lst.previous_page_number,
         next_page_number=lst.next_page_number,
     )
-

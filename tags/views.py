@@ -30,8 +30,7 @@ def show_tagged_figures(request, tag_id_in_str):
     tag = get_object_or_404(Tag, pk=tag_id)
     Image = get_image_model()
     figures = Image.objects.filter(tags__id=tag_id)
-    return render(request, 'tags/tagged_figures.html', {
+    return render( request, 'tags/tagged_figures.html', {
         'tag': tag,
         'figures': figures,
-    })
-
+    })  # yapf: disable

@@ -10,6 +10,7 @@ from .utils import auto_check_image
 
 
 class SourcedImage(AbstractImage):
+
     class Meta:
         unique_together = ('pixiv_id', 'pixiv_order')
 
@@ -25,7 +26,12 @@ class SourcedImage(AbstractImage):
     show = BooleanField(null=False, default=True, blank=True)
 
     admin_form_fields = _Image.admin_form_fields + (
-        'orig_link', 'pixiv_id', 'pixiv_order', 'is_restricted', 'show', 'desc',
+        'orig_link',
+        'pixiv_id',
+        'pixiv_order',
+        'is_restricted',
+        'show',
+        'desc',
     )
 
     def get_pixiv_link(self):
@@ -38,12 +44,9 @@ class ImageRendition(AbstractRendition):
     image = ForeignKey(SourcedImage, related_name='renditions')
 
     class Meta(_Rendition.Meta):
-        unique_together = (
-            ('image', 'filter_spec', 'focal_point_key'),
-        )
+        unique_together = (('image', 'filter_spec', 'focal_point_key'), )
 
 
 @receiver(pre_save, sender=SourcedImage)
 def update_image(sender, instance, **kw):
     auto_check_image(instance)
-

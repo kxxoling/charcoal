@@ -7,7 +7,6 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from wagtail.wagtailimages import get_image_model
 
-
 Image = get_image_model()
 
 
@@ -36,4 +35,3 @@ def show_image(request, image_id):
     return render(request, 'images/image.html', {
         'img': image,
     })
-

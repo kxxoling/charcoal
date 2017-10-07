@@ -34,7 +34,7 @@ def pixiv_fixtures():
                 'order': '',
             }
         ),
-    )
+    )  # yapf: disable
 
 
 @pytest.fixture(scope='module')
@@ -62,7 +62,7 @@ def old_pixiv_fixtures():
                 'order': '',
             }
         ),
-    )
+    )  # yapf: disable
 
 
 @pytest.fixture(scope='module')
@@ -90,7 +90,7 @@ def twitter_fixtures():
                 'hash': 'DKucDZrVAAAPMDE',
             }
         ),
-    )
+    )  # yapf: disable
 
 
 def test_pixiv_pattern(pixiv_fixtures):
@@ -115,4 +115,3 @@ def test_twitter_pattern(twitter_fixtures):
         search = twitter_image_filename_pattern.search(filename)
         assert search.groups()[:4] == groups[:4]
         assert search.groupdict() == groupdict
-

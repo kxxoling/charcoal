@@ -11,8 +11,13 @@ from wagtail.wagtailadmin.menu import MenuItem
 @hooks.register('construct_whitelister_element_rules')
 def whitelister_element_rules():
     return {
-        'a': attribute_rule({'href': check_url, 'target': True}),
-        'blockquote': attribute_rule({'class': True}),
+        'a': attribute_rule({
+            'href': check_url,
+            'target': True
+        }),
+        'blockquote': attribute_rule({
+            'class': True
+        }),
     }
 
 
@@ -22,8 +27,7 @@ def editor_js():
         'js/hallo_custombuttons.js',
     ]
     js_includes = format_html_join(
-        '\n',
-        '<script src="{0}{1}"></script>',
+        '\n', '<script src="{0}{1}"></script>',
         ((settings.STATIC_URL, filename) for filename in js_files)
     )
 
@@ -38,10 +42,16 @@ def editor_js():
 
 @hooks.register('insert_editor_css')
 def editor_css():
-    return format_html('<link rel="stylesheet" href="%sfa/css/font-awesome.min.css">' % settings.STATIC_URL)
+    return format_html(
+        '<link rel="stylesheet" href="%sfa/css/font-awesome.min.css">' % settings.STATIC_URL
+    )
 
 
 @hooks.register('register_admin_menu_item')
 def register_django_admin_menu_item():
-    return MenuItem('Tags', reverse('admin:taggit_tag_changelist'), classnames='icon icon-folder-inverse', order=10000)
-
+    return MenuItem(
+        'Tags',
+        reverse('admin:taggit_tag_changelist'),
+        classnames='icon icon-folder-inverse',
+        order=10000
+    )

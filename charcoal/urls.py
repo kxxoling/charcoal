@@ -12,21 +12,17 @@ from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 
-
 urlpatterns = [
     url(r'^console/', include(admin.site.urls)),
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
-
     url(r'^search/$', search_views.search, name='search'),
     url(r'^tags/$', tags_views.show_tags, name='tags'),
     url(r'^tag/([0-9]+)/$', tags_views.show_tagged_figures, name='tagged_figures'),
     url(r'^images/$', images_views.show_images, name='images'),
     url(r'^images/([0-9]+)/$', images_views.show_image, name='show_image'),
-
     url(r'', include(wagtail_urls)),
 ]
-
 
 if settings.DEBUG:
     from django.conf.urls.static import static

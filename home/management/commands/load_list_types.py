@@ -2,7 +2,6 @@
 from django.core.management import BaseCommand
 from home.models import list_page_models, HomePage
 
-
 ArticleListPage, GalleryListPage, VideoListPage, SharedLinkListPage = list_page_models
 list_pages = [
     dict(model=ArticleListPage, url='a', title='articles'),

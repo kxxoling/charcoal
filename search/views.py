@@ -30,8 +30,7 @@ def search(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
 
-    return render(request, 'search/search.html', {
+    return render( request, 'search/search.html', {
         'search_query': search_query,
         'posts': posts,
-    })
-
+    })  # yapf: disable

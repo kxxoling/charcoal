@@ -6,4 +6,3 @@ def template_env(request):
     return {
         'SITE_TITLE': settings.SITE_TITLE,
     }
-
