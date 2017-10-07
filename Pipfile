@@ -8,6 +8,8 @@ verify_ssl = true
 werkzeug = "*"
 "pytest-django" = "*"
 ipython = "*"
+yapf = "*"
+futures = "*"
 
 [packages]
 wagtail = ">=1.12,<2"
