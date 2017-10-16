@@ -1,0 +1,4 @@
+.venv/
+media/
+dev_media/
+*.sqlite3

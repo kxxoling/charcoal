@@ -12,9 +12,9 @@ def pagination(lst):
     current = lst.number
     has_left_ellips = (current - width) > (start + 1)
     has_right_ellips = (end - width) > (current + 1)
-    page_range = range(max(start, current - width), current)\
-        + [ current ]\
-        + range(current + 1, min(end, current + width))
+    page_range = list(range(max(start, current - width), current))\
+                 + [current]\
+                 + list(range(current + 1, min(end, current + width)))
 
     return dict(
         start=start,
