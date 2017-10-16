@@ -4,6 +4,7 @@
 
 charcoal/settings/prod.py
 charcoal/settings/docker.py
+**/*.min.css
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

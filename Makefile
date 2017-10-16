@@ -1,8 +1,9 @@
-all: install install-dep format docker-image
+all: install install-dep format docker-image statics
 
 install:
 	pipenv install --ignore-pipfile
 	pipenv install --dev --ignore-pipfile
+	wget https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.0/css/bulma.min.css -O charcoal/static/css/bulma.min.css
 
 install-dep:
 	sudo apt-get install libxml2-dev libxslt1-dev lib-pq libmagickwand-dev
@@ -13,9 +14,10 @@ install-dep:
 format:
 	yapf -irp -e "./.venv/**" -e "**/migrations/**" **/**.py
 
-docker-image:
-	rm -r static/*
+statics:
+	rm -rf static/*
 	pipenv run ./manage.py collectstatic
 	pipenv run ./manage.py compress -f
-	docker build -t charcoal -f ./docker/app/Dockerfile .
 
+docker-image: statics
+	docker build -t charcoal -f ./docker/app/Dockerfile .
