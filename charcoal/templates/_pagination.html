@@ -1,39 +1,39 @@
-<nav class="pagination">
-  <ul>
+<nav class="pagination is-centered" role="pagination" aria-label="pagination">
+  <ul class="pagination-list">
     {% if has_previous %}
-      <li><a class="button" href="?page={{ previous_page_number }}">{{ '<' }}</a></li>
+      <li><a class="pagination-previous" href="?page={{ previous_page_number }}">{{ '<' }}</a></li>
     {% else %}
-    <li class="disabled"><span>{{ '<' }}</span></li>
+      <li><span class="pagination-previous" disabled>{{ '<' }}</span></li>
     {% endif %}
 
     {% if show_start %}
-      <li><a class="button" href="?">{{ start }}</a></li>
+      <li><a class="pagination-link" href="?">{{ start }}</a></li>
     {% endif %}
 
     {% if has_left_ellips %}
-      <li class=""><span>...</span></li>
+      <li class=""><span class="pagination-ellipsis">...</span></li>
     {% endif %}
 
     {% for i in page_range %}
       {% if current == i %}
-        <li class="button is-primary"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        <li class="pagination-link" is-current"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
       {% else %}
-        <li><a class="button" href="?page={{ i }}">{{ i }}</a></li>
+        <li><a class="pagination-link" href="?page={{ i }}">{{ i }}</a></li>
       {% endif %}
     {% endfor %}
 
     {% if has_right_ellips %}
-      <li class=""><span>...</span></li>
+      <li class=""><span class="pagination-ellipsis">...</span></li>
     {% endif %}
 
     {% if show_end %}
-      <li><a class="button" href="?page={{ end }}">{{ end }}</a></li>
+      <li><a class="pagination-link" href="?page={{ end }}">{{ end }}</a></li>
     {% endif %}
 
     {% if has_next %}
-      <li><a class="button" href="?page={{ next_page_number }}">{{ '>' }}</a></li>
+      <li><a class="pagination-next" href="?page={{ next_page_number }}">{{ '>' }}</a></li>
     {% else %}
-    <li class="disabled"><span>{{ '>' }}</span></li>
+      <li><span class="pagination-next" disabled>{{ '>' }}</span></li>
     {% endif %}
   </ul>
 </nav>
