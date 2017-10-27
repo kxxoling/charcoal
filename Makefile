@@ -3,7 +3,7 @@ all: install install-dep format docker-image statics
 install:
 	pipenv install --ignore-pipfile
 	pipenv install --dev --ignore-pipfile
-	wget https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.0/css/bulma.min.css -O charcoal/static/css/bulma.min.css
+	wget https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.min.css -O charcoal/static/css/bulma.min.css
 
 install-dep:
 	sudo apt-get install libxml2-dev libxslt1-dev lib-pq libmagickwand-dev

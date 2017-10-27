@@ -1,20 +1,18 @@
-.primary-nav
-  width 100%
-  background rgba(0,190, 160, 0.8)
+.header
+  box-shadow 0 0 1rem #555
+  .primary-nav
+    width 100%
+    background rgba(0,190, 160, 0.8)
 
-  .nav-item.is-tab
-    color #f0f0f0f0
+    .navbar-item
+      &:hover
+        border-bottom-width 3px
 
-    &.is-active
-      color white
-
-.control.has-icon .icon
-  color #dbdbdb
-  pointer-events none
-  position absolute
-  top 0.5rem
-  left 0.5rem
-  z-index 4
+    .control.has-icon .icon
+      color #dbdbdb
+      pointer-events none
+      position absolute
+      z-index 4
 
 .tag a
   text-decoration none
@@ -36,9 +34,6 @@
   padding 0 !important
   display flex
   justify-content center
-
-.header
-  box-shadow 0 0 1rem #555
 
 .panel, .content-container .content
   box-shadow 0 0 1rem #ccc

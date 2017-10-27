@@ -1,26 +1,19 @@
 <section class="header hero is-primary is-bold">
   <div class="hero-head">
-    <nav class="primary-nav nav has-shadow">
+    <nav class="navbar primary-nav has-shadow" role="navigation" aria-label="main navigation">
       <div class="container">
-        <div class="nav-left">
-          <!--<a class="nav-item">-->
-            <!--<img src="" alt="logo">-->
-          <!--</a>-->
-          <a class="nav-item is-tab is-hidden-mobile nav-home" href="/">Home</a>
-          <a class="nav-item is-tab is-hidden-mobile nav-articles" href="/a/">Articles</a>
-          <a class="nav-item is-tab is-hidden-mobile nav-galleries" href="/g/">Galleries</a>
-          <a class="nav-item is-tab is-hidden-mobile nav-videos" href="/v/">Videos</a>
-          <a class="nav-item is-tab is-hidden-mobile nav-links" href="/l/">Shared Links</a>
-          <a class="nav-item is-tab is-hidden-mobile nav-tags" href="{% url 'tags' %}">Tags</a>
-          <a class="nav-item is-tab is-hidden-mobile nav-images" href="{% url 'images' %}">Figures</a>
+        <div class="navbar-start">
+          <a class="navbar-item is-tab is-hidden-mobile nav-home" href="/">Home</a>
+          <a class="navbar-item is-tab is-hidden-mobile nav-articles" href="/a/">Articles</a>
+          <a class="navbar-item is-tab is-hidden-mobile nav-galleries" href="/g/">Galleries</a>
+          <a class="navbar-item is-tab is-hidden-mobile nav-videos" href="/v/">Videos</a>
+          <a class="navbar-item is-tab is-hidden-mobile nav-links" href="/l/">Shared Links</a>
+          <a class="navbar-item is-tab is-hidden-mobile nav-tags" href="{% url 'tags' %}">Tags</a>
+          <a class="navbar-item is-tab is-hidden-mobile nav-images" href="{% url 'images' %}">Figures</a>
         </div>
 
-        <div class="nav-right nav-menu">
-          <a class="nav-item is-tab is-hidden-tablet is-active">Home</a>
-          <a class="nav-item is-tab is-hidden-tablet">Features</a>
-          <a class="nav-item is-tab is-hidden-tablet">Pricing</a>
-          <a class="nav-item is-tab is-hidden-tablet">About</a>
-          <span class="nav-item is-tab">
+        <div class="navbar-end nav-menu">
+          <span class="navbar-item">
             <form class="control has-icon" action="/search">
               <input class="input is-midium" type="text" placeholder="Search" name="s">
               <span class="icon is-small">
@@ -28,7 +21,7 @@
               </span>
             </form>
           </span>
-          <a class="nav-item is-tab" href="/admin/">
+          <a class="navbar-item is-tab is-active" href="/admin/">
           {% if user.is_authenticated %}
             Admin
           {% else %}
@@ -53,29 +46,25 @@
   </div>
 
   <div class="hero-foot">
-    <div class="container level">
+    <nav class="container level">
       <div class="level-left"></div>
-      <nav class="tabs level-right">
-        <div class="container title is-3">
-          <ul>
-            <li>
-              <a target="_blank" href="//blog.windrunner.me">
-                <i class="fa fa-book"></i>
-              </a>
-            </li>
-            <li>
-              <a target="_blank" href="//github.com/kxxoling">
-                <i class="fa fa-github"></i>
-              </a>
-            </li>
-            <li>
-              <a target="_blank" href="//github.com/kxxoling/charcoal/">
-                <i class="fa fa-code-fork"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <ul class="level-right title is-3">
+        <li class="level-item">
+          <a target="_blank" href="//blog.windrunner.me">
+            <i class="fa fa-book"></i>
+          </a>
+        </li>
+        <li class="level-item">
+          <a target="_blank" href="//github.com/kxxoling">
+            <i class="fa fa-github"></i>
+          </a>
+        </li>
+        <li class="level-item">
+          <a target="_blank" href="//github.com/kxxoling/charcoal/">
+            <i class="fa fa-code-fork"></i>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </section>

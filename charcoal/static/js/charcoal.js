@@ -18,6 +18,6 @@
     active = 'home';
   }
 
-  var activeNode = document.querySelector('.header .nav-left .nav-' + active);
+  var activeNode = document.querySelector('.header .navbar-start .nav-' + active);
   activeNode.classList.add('is-active');
 })()

@@ -5,14 +5,15 @@
   padding 10px
   box-shadow inset 0 0 10px #ccc
 
-.section
-  padding 10px 20px
-
-.content
-  .title
-    font-size 2.4em
-    line-height 2em
-    border-bottom 1px solid #ddd
+.content-container
+  .section
+    padding 10px 20px
+    .content
+      box-shadow none
+      .title
+        font-size 2.4rem
+        line-height 4rem
+        border-bottom 1px solid #ddd
 
     a
       text-decoration none
@@ -24,15 +25,15 @@
       a
         color #00a98c
 
-  .content-wrapper
-    margin-bottom 20px
+    .content-wrapper
+      margin-bottom 20px
 
-  .post-body
-    margin-bottom 30px
+    .post-body
+      margin-bottom 30px
 
-  .richtext-image
-    &.right
-      float right
+    .richtext-image
+      &.right
+        float right
 
 .time-container
   color #aaa
@@ -45,7 +46,4 @@
   .tag
     a
       text-indent 4px
-
-.container .section .content
-  box-shadow none
 
