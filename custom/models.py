@@ -12,7 +12,10 @@ from .utils import auto_check_image
 class SourcedImage(AbstractImage):
 
     class Meta:
-        unique_together = ('pixiv_id', 'pixiv_order')
+        unique_together = (
+            ('pixiv_id', 'pixiv_order'),
+            ('da_username', 'da_path'),
+        )
 
     orig_link = CharField(blank=True, null=True, max_length=300)
     source = CharField(blank=True, null=True, max_length=30)
@@ -22,6 +25,10 @@ class SourcedImage(AbstractImage):
     pixiv_id = IntegerField(null=True, default=None, blank=True)
     pixiv_order = IntegerField(null=True, default=0, blank=True)
 
+    da_id = IntegerField(null=True, default=None, blank=True, unique=True)
+    da_username = CharField(blank=True, null=True, default=None, max_length=50)
+    da_path =  CharField(blank=True, null=True, default=None, max_length=150)
+
     is_restricted = BooleanField(null=False, default=False, blank=True)
     show = BooleanField(null=False, default=True, blank=True)
 
@@ -29,6 +36,9 @@ class SourcedImage(AbstractImage):
         'orig_link',
         'pixiv_id',
         'pixiv_order',
+        'da_id',
+        'da_username',
+        'da_path',
         'is_restricted',
         'show',
         'desc',

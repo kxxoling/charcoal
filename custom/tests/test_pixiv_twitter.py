@@ -5,8 +5,8 @@ import re
 
 import pytest
 
-from .utils import old_pixiv_image_filename_pattern, pixiv_image_filename_pattern
-from .utils import twitter_image_filename_pattern
+from custom.utils import old_pixiv_image_filename_pattern, pixiv_image_filename_pattern
+from custom.utils import twitter_image_filename_pattern
 
 
 @pytest.fixture(scope='module')
