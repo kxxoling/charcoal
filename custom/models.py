@@ -27,7 +27,7 @@ class SourcedImage(AbstractImage):
 
     da_id = IntegerField(null=True, default=None, blank=True, unique=True)
     da_username = CharField(blank=True, null=True, default=None, max_length=50)
-    da_path =  CharField(blank=True, null=True, default=None, max_length=150)
+    da_path = CharField(blank=True, null=True, default=None, max_length=150)
 
     is_restricted = BooleanField(null=False, default=False, blank=True)
     show = BooleanField(null=False, default=True, blank=True)

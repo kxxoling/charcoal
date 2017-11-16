@@ -7,6 +7,7 @@ from django.contrib import admin
 from search import views as search_views
 from tags import views as tags_views
 from images import views as images_views
+from posts.feeds import ArticlesRSSFeed, ArticlesAtomFeed
 
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
@@ -21,6 +22,8 @@ urlpatterns = [
     url(r'^tag/([0-9]+)/$', tags_views.show_tagged_figures, name='tagged_figures'),
     url(r'^images/$', images_views.show_images, name='images'),
     url(r'^images/([0-9]+)/$', images_views.show_image, name='show_image'),
+    url(r'^rss/a/$', ArticlesRSSFeed()),
+    url(r'^atom/a/$', ArticlesAtomFeed()),
     url(r'', include(wagtail_urls)),
 ]
 
